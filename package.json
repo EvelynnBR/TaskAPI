@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts"
   },
-  "author": "",
+  "author": "Evelyn bezerra",
   "license": "ISC",
   "dependencies": {
     "express": "^5.1.0",
