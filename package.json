@@ -11,8 +11,10 @@
   "dependencies": {
     "@prisma/client": "^5.19.1",
     "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.10",
     "bcrypt": "^5.1.1",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "tsx": "^4.20.6",
     "zod": "^4.1.12"
   },
