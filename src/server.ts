@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from "express"
-import { routes } from "@/task-routes/index"
+import { routes } from "@/routes/index"
 import { errorHandling } from "@/middlewares/error-handling"
 
 const app = express()
