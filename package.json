@@ -4,18 +4,21 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "tsx watch src/server.ts"
+    "dev": "tsx watch --env-file .env src/server.ts"
   },
   "author": "Evelyn bezerra",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^5.19.1",
+    "@types/bcrypt": "^5.0.2",
+    "bcrypt": "^5.1.1",
     "express": "^5.1.0",
     "tsx": "^4.20.6",
     "zod": "^4.1.12"
   },
   "devDependencies": {
     "@types/express": "^5.0.5",
-    "prisma": "^7.0.0",
+    "prisma": "^5.19.1",
     "typescript": "^5.9.3"
   }
 }
