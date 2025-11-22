@@ -1,8 +1,10 @@
 import { Request, Response, NextFunction } from "express"
 import { prisma } from "@/database/prisma"
+import { AppError } from "@/utils/appError"
+import { authConfig } from "@/config/auth"
 import { compare } from "bcrypt"
 import { z } from "zod"
-import { AppError } from "@/utils/appError"
+import { sign } from "jsonwebtoken"
 
 export class SessionController {
   async session(request: Request, response: Response) {
@@ -24,7 +26,15 @@ export class SessionController {
       throw new AppError("E-mail ou senha invalido!", 400)
     }
 
+    const { secret, expiresIn } = authConfig.jwt
+
+    const token = sign({ name: user.name, email: user.email }, secret, {
+      subject: user.id,
+      expiresIn,
+    })
+
     const { password: hashedPassword, ...userWithoutPassword } = user
-    return response.status(201).json({ userWithoutPassword })
+    
+    return response.status(201).json({ token, userWithoutPassword })
   }
 }
