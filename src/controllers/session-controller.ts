@@ -34,7 +34,7 @@ export class SessionController {
     })
 
     const { password: hashedPassword, ...userWithoutPassword } = user
-    
+
     return response.status(201).json({ token, userWithoutPassword })
   }
 }

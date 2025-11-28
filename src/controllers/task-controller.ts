@@ -26,19 +26,19 @@ export class TaskController {
   async index(request: Request, response: Response) {
     const lisTask = await prisma.task.findMany({
       where: {
-        userId: request.user?.id
+        userId: request.user?.id,
       },
       select: {
         user: {
           select: {
-            name:true,
-            email:true
-          }
+            name: true,
+            email: true,
+          },
         },
         title: true,
         description: true,
         status: true,
-      }
+      },
     })
     return response.json(lisTask)
   }

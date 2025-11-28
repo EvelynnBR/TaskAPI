@@ -3,23 +3,30 @@ import { verify } from "jsonwebtoken"
 import { AppError } from "@/utils/appError"
 import { authConfig } from "@/config/auth"
 
-interface TokenPayload{
+interface TokenPayload {
   sub: string
 }
 
-export function ensureAuthenticated(request: Request, response: Response, next: NextFunction){
+export function ensureAuthenticated(
+  request: Request,
+  response: Response,
+  next: NextFunction
+) {
   try {
     const authHeader = request.headers.authorization
-    if(!authHeader){
+    if (!authHeader) {
       throw new AppError("JWT not found", 401)
     }
 
-    const [ , token] = authHeader.split(" ")
+    const [, token] = authHeader.split(" ")
 
-    const { sub: user_id } = verify(token, authConfig.jwt.secret) as TokenPayload
+    const { sub: user_id } = verify(
+      token,
+      authConfig.jwt.secret
+    ) as TokenPayload
 
     request.user = {
-      id: user_id
+      id: user_id,
     }
 
     return next()
