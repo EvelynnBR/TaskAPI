@@ -9,7 +9,7 @@ export class TaskStatusController {
     const userId = request.user?.id
 
     const statusSchema = z.object({
-      status: z.enum(["pending", "inProgress", "completed"])
+      status: z.enum(["pending", "inProgress", "completed"]),
     })
     const { status } = statusSchema.parse(request.body)
 
@@ -29,8 +29,8 @@ export class TaskStatusController {
     const updated = await prisma.task.update({
       where: { id },
       data: {
-        status
-      }
+        status,
+      },
     })
     return response.json(updated)
   }
