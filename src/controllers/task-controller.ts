@@ -1,20 +1,25 @@
 import { Request, Response } from "express"
 import { prisma } from "@/database/prisma"
 import { z } from "zod"
+import { AppError } from "@/utils/appError"
 
 export class TaskController {
   async create(request: Request, response: Response) {
+    const userId = request.user?.id
+    if (! userId) {
+      throw new AppError("User ID not found from token", 401)
+    }
+
     const task = z.object({
-      user_id: z.string().uuid(),
       title: z.string().trim().min(5),
       description: z.string().trim().min(5),
     })
 
-    const { user_id, title, description } = task.parse(request.body)
+    const { title, description } = task.parse(request.body)
 
     const createdTask = await prisma.task.create({
       data: {
-        userId: user_id,
+        userId,
         title,
         description,
       },
