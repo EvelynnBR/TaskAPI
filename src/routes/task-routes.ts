@@ -11,7 +11,7 @@ const taskStatusController = new TaskStatusController()
 const taskUpdateController = new TaskUpdateController()
 const taskDeleteController = new TaskDeleteController()
 
-taskRoutes.post("/", taskController.create)
+taskRoutes.post("/", ensureAuthenticated, taskController.create)
 taskRoutes.get("/", ensureAuthenticated, taskController.index)
 taskRoutes.patch("/:id", ensureAuthenticated, taskStatusController.update)
 taskRoutes.put("/:id", ensureAuthenticated, taskUpdateController.update)
